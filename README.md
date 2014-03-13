@@ -9,3 +9,13 @@ We're spotting these sites (through their APIs):
  * [craigslist.com](http://www.craigslist.com): [RSS](http://sfbay.craigslist.org/sof/index.rss)
  * [linkedin.com](http://www.linkedin.com): [API](https://developer.linkedin.com/apis#jobs)
  
+Every few minutes we check what's new and store every new job in PostgreSQL tables:
+
+ * `area`: PK:`id`, `name`, `sources` (JSON configuration of Ruby objects)
+ * `job`: PK:`id`, `area`, `uri`, `office`, `date`, `title`
+ * `office`: PK:`id`, `name`
+
+You, as a user, can do two things:
+
+ 1. Create new area
+ 2. View offices in any area
