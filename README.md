@@ -19,3 +19,20 @@ You, as a user, can do two things:
 
  1. Create new area
  2. View offices in any area
+
+Every area is configured with JSON, for example:
+
+```json
+{
+  "dice": {
+    "country": "US",
+    "state": "CA",
+    "city": "94040",
+    "skill": "java"
+  },
+  "github": {
+    "keyword": "java"
+  },
+  ...
+}
+```
