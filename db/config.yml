@@ -1,5 +1,5 @@
 development:
-  adapter: postgresql
+  adapter: postgres
   server: localhost
   database: jobspotting
   pool: 5
@@ -8,10 +8,11 @@ development:
   password: curiost
 
 production:
-  adapter: postgresql
+  adapter: postgres
+  server: -heroku-
   encoding: utf8
   reconnect: false
-  database: test
+  database: -heroku-
   pool: 5
-  username: root
-  password:
+  username: -heroku-
+  password: -heroku-

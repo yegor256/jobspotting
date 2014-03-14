@@ -26,14 +26,15 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-source 'https://rubygems.org'
-ruby '2.1.0'
+require_relative 'lib/areas'
+require_relative 'lib/database'
 
-gem 'rake'
-gem 'sinatra', '1.1.0'
-gem 'pg'
-gem 'feedzirra'
-gem 'rails'
-gem 'standalone_migrations'
-gem 'sequel'
-gem 'psych'
+db = Database.connect
+Areas.new(db).all do |area|
+  jobs = area.jobs
+  Factory.new.make(area.sources).each do |channel|
+    channel.fetch.each do |job|
+      jobs.add(job)
+    end
+  end
+end

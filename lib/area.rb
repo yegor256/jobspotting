@@ -26,14 +26,17 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-source 'https://rubygems.org'
-ruby '2.1.0'
+require_relative 'jobs'
 
-gem 'rake'
-gem 'sinatra', '1.1.0'
-gem 'pg'
-gem 'feedzirra'
-gem 'rails'
-gem 'standalone_migrations'
-gem 'sequel'
-gem 'psych'
+class Area
+  def initialize(db, id)
+    @db = db
+    @id = id
+  end
+  def id
+    @id
+  end
+  def jobs
+    Jobs.new(@db, @id)
+  end
+end

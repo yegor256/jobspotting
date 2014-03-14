@@ -26,14 +26,25 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-source 'https://rubygems.org'
-ruby '2.1.0'
+require 'sequel'
+require_relative 'area'
+require_relative 'jobs'
 
-gem 'rake'
-gem 'sinatra', '1.1.0'
-gem 'pg'
-gem 'feedzirra'
-gem 'rails'
-gem 'standalone_migrations'
-gem 'sequel'
-gem 'psych'
+class Areas
+  def initialize(db)
+    @db = db
+  end
+  def all
+    @db[:area].map { |row|
+      Jobs.new(@db, row.id)
+    }
+  end
+  def create(name, sources)
+    Area.new(
+      @db,
+      @db[:area].insert(
+        :name => name, :sources => sources
+      )
+    )
+  end
+end

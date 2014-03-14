@@ -13,23 +13,21 @@
 
 ActiveRecord::Schema.define(:version => 20140314121338) do
 
-  create_table "area", :id => false, :force => true do |t|
-    t.integer "id",                     :null => false
-    t.string  "name",    :limit => 120
-    t.text    "sources"
+  create_table "area", :force => true do |t|
+    t.string "name",    :limit => 120, :null => false
+    t.text   "sources",                :null => false
   end
 
-  create_table "job", :id => false, :force => true do |t|
-    t.integer  "id",                     :null => false
+  create_table "job", :force => true do |t|
     t.integer  "area"
     t.integer  "office"
-    t.datetime "date"
-    t.string   "title",  :limit => 1024
+    t.string   "uri",    :limit => 1024, :null => false
+    t.datetime "date",                   :null => false
+    t.string   "title",  :limit => 1024, :null => false
   end
 
-  create_table "office", :id => false, :force => true do |t|
-    t.integer "id",                  :null => false
-    t.string  "name", :limit => 120
+  create_table "office", :force => true do |t|
+    t.string "name", :limit => 120, :null => false
   end
 
 end

@@ -26,14 +26,24 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-source 'https://rubygems.org'
-ruby '2.1.0'
+require 'sequel'
 
-gem 'rake'
-gem 'sinatra', '1.1.0'
-gem 'pg'
-gem 'feedzirra'
-gem 'rails'
-gem 'standalone_migrations'
-gem 'sequel'
-gem 'psych'
+class Jobs
+  def initialize(db, id)
+    @db = db
+    @id = id
+  end
+  def push(job)
+    if @db[:office].where(:name => job.office).empty?
+      @db[:office].insert(
+        :name => job.office
+      )
+    end
+    @db[:job].insert(
+      :area => @id,
+      :office => 1,
+      :uri => job.uri,
+      :title => job.title
+    )
+  end
+end

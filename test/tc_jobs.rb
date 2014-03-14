@@ -26,14 +26,18 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-source 'https://rubygems.org'
-ruby '2.1.0'
+require_relative '../lib/areas'
+require_relative '../lib/job'
+require_relative '../lib/jobs'
+require_relative '../lib/database'
+require 'test/unit'
 
-gem 'rake'
-gem 'sinatra', '1.1.0'
-gem 'pg'
-gem 'feedzirra'
-gem 'rails'
-gem 'standalone_migrations'
-gem 'sequel'
-gem 'psych'
+class JobsTest < Test::Unit::TestCase
+  def test_push
+    job = Job.new('#', 'Google', 'Java developer')
+    db = Database.new.connect
+    area = Areas.new(db).create('test', '')
+    id = Jobs.new(db, area.id).push(job)
+    assert_not_nil id
+  end
+end
