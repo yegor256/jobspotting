@@ -51,11 +51,13 @@ class Github
     ).entries.map { |entry|
       entry.sanitize!
       title = entry.title
-      Job.new(
-        entry.url,
-        title[title.rindex('/ at /') + 4,],
-        title
-      )
+      pos = title.rindex(' at ')
+      if pos
+        office = title[pos + 4, title.length]
+      else
+        office = 'unknown'
+      end
+      Job.new(entry.url, office, title)
     }
   end
 end
