@@ -1,0 +1,17 @@
+development:
+  adapter: postgresql
+  server: localhost
+  database: jobspotting
+  pool: 5
+  timeout: 5000
+  username: curiost
+  password: curiost
+
+production:
+  adapter: postgresql
+  encoding: utf8
+  reconnect: false
+  database: test
+  pool: 5
+  username: root
+  password:

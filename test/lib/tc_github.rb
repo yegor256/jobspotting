@@ -26,9 +26,19 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-source "https://rubygems.org"
-ruby "2.1.0"
-gem 'sinatra', '1.1.0'
-gem 'pg'
-gem 'feedzirra'
-gem 'standalone_migrations'
+require_relative '../../lib/channels/github'
+require 'test/unit'
+
+class GithubTest < Test::Unit::TestCase
+  def test_fetch
+    args = {
+      :description => 'java',
+      :location => 'San Francisco'
+    }
+    Github.new(args).fetch do |job|
+      assert_not_nil job.uri
+      assert_not_nil job.title
+      assert_not_nil job.office
+    end
+  end
+end

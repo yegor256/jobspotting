@@ -26,9 +26,12 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-source "https://rubygems.org"
-ruby "2.1.0"
-gem 'sinatra', '1.1.0'
-gem 'pg'
-gem 'feedzirra'
-gem 'standalone_migrations'
+require 'standalone_migrations'
+StandaloneMigrations::Tasks.load_tasks
+
+task :default => [:test]
+
+task :test do
+  ruby 'test/lib/tc_dice.rb'
+  ruby 'test/lib/tc_github.rb'
+end

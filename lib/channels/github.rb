@@ -26,9 +26,31 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-source "https://rubygems.org"
-ruby "2.1.0"
-gem 'sinatra', '1.1.0'
-gem 'pg'
-gem 'feedzirra'
-gem 'standalone_migrations'
+require_relative '../job'
+require 'feedzirra'
+
+class Github
+  def initialize(args)
+    @description = args[:description]
+    @location = args[:location]
+  end
+  def fetch
+    Feedzirra::Feed.fetch_and_parse(
+      URI::HTTP.build(
+        {
+          :scheme => 'https',
+          :host => 'jobs.github.com',
+          :path => '/positions.atom',
+          :query => URI.escape(
+            {
+              'description' => @description,
+              'location' => @location
+            }.collect { |k,v| "#{k}=#{v}" }.join('&'))
+        }
+      ).to_s
+    ).entries.map { |entry|
+      entry.sanitize!
+      Job.new(entry.url, 'unknown', entry.title)
+    }
+  end
+end

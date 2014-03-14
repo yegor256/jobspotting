@@ -26,9 +26,16 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-source "https://rubygems.org"
-ruby "2.1.0"
-gem 'sinatra', '1.1.0'
-gem 'pg'
-gem 'feedzirra'
-gem 'standalone_migrations'
+require_relative '../../lib/channels/dice'
+require 'test/unit'
+
+class DiceTest < Test::Unit::TestCase
+  def test_fetch
+    args = {
+      :query => 'java'
+    }
+    Dice.new(args).fetch do |job|
+      assert_not_nil job
+    end
+  end
+end

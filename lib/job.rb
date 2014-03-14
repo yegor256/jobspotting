@@ -26,9 +26,11 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-source "https://rubygems.org"
-ruby "2.1.0"
-gem 'sinatra', '1.1.0'
-gem 'pg'
-gem 'feedzirra'
-gem 'standalone_migrations'
+class Job
+  attr_accessor :uri, :office, :title
+  def initialize(uri, office, title)
+    @uri = uri
+    @office = office
+    @title = title
+  end
+end
