@@ -26,12 +26,14 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-require 'json'
+require_relative '../../../lib/channels/factory'
+require_relative '../../../lib/channels/github'
+require 'test/unit'
 
-class Factory
-  def make(json)
-    JSON.parse(json).map do |key, value|
-      Kernel.const_get(key).new(value)
-    end
+class FactoryTest < Test::Unit::TestCase
+  def test_make
+    json = '{"Github": {"description": "java", "location": "San Francisco"}}'
+    channel = Factory.new.make(json).first
+    assert_instance_of(Github, channel)
   end
 end
