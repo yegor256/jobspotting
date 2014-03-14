@@ -26,25 +26,21 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-require 'sequel'
-require_relative 'area'
-require_relative 'jobs'
+require_relative '../lib/areas'
+require_relative '../lib/job'
+require_relative '../lib/jobs'
+require_relative '../lib/database'
+require 'test/unit'
+require 'ramcrest'
 
-class Areas
-  def initialize(db)
-    @db = db
-  end
-  def all
-    @db[:area].map { |row|
-      Jobs.new(@db, row[:id])
-    }
-  end
-  def create(name, sources)
-    Area.new(
-      @db,
-      @db[:area].insert(
-        :name => name, :sources => sources
-      )
-    )
+class AreasTest < Test::Unit::TestCase
+  include Ramcrest::Comparable
+  include Ramcrest::HasSize
+  def test_create
+    db = Database.new.connect
+    areas = Areas.new(db)
+    areas.create('first', '')
+    areas.create('second', '')
+    assert_that(areas.all, has_size(greater_than(1)))
   end
 end
