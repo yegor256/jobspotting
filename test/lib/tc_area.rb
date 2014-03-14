@@ -26,23 +26,18 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-require_relative 'jobs'
+require_relative '../../lib/areas'
+require_relative '../../lib/job'
+require_relative '../../lib/jobs'
+require_relative '../../lib/database'
+require 'test/unit'
 
-class Area
-  def initialize(db, id)
-    @db = db
-    @id = id
-  end
-  def id
-    @id
-  end
-  def name
-    @db[:area].where(:id => @id).first[:name]
-  end
-  def sources
-    @db[:area].where(:id => @id).first[:sources]
-  end
-  def jobs
-    Jobs.new(@db, @id)
+class AreaTest < Test::Unit::TestCase
+  def test_create
+    db = Database.new.connect
+    json = '{"hey": 1}'
+    area = Areas.new(db).create('first', json)
+    assert_equal(area.name, 'first')
+    assert_equal(area.sources, json)
   end
 end

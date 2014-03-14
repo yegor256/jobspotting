@@ -50,7 +50,12 @@ class Github
       ).to_s
     ).entries.map { |entry|
       entry.sanitize!
-      Job.new(entry.url, 'unknown', entry.title)
+      title = entry.title
+      Job.new(
+        entry.url,
+        title[title.rindex('/ at /') + 4,],
+        title
+      )
     }
   end
 end

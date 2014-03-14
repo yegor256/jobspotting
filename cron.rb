@@ -28,13 +28,28 @@
 
 require_relative 'lib/areas'
 require_relative 'lib/database'
+require_relative 'lib/channels/factory'
+require 'logger'
+
+logger = Logger.new(STDOUT)
+logger.level = Logger::INFO
+logger.formatter = Proc.new { |severity, time, prog, msg |
+  "#{severity}: #{msg}\n"
+}
+logger.info('Ready to go...')
 
 db = Database.new.connect
-Areas.new(db).all do |area|
+
+Areas.new(db).all.each do |area|
+  logger.info("area: #{area.name}")
   jobs = area.jobs
   Factory.new.make(area.sources).each do |channel|
+    logger.info("  fetching #{channel.class.name}")
     channel.fetch.each do |job|
-      jobs.add(job)
+      jobs.push(job)
     end
   end
 end
+
+logger.info('Done, thanks!')
+

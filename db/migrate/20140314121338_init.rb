@@ -31,14 +31,14 @@ class Init < ActiveRecord::Migration
     execute '''
     CREATE TABLE area (
       id SERIAL PRIMARY KEY,
-      name VARCHAR(120) NOT NULL,
+      name VARCHAR(120) UNIQUE NOT NULL,
       sources TEXT NOT NULL
     )
     '''
     execute '''
     CREATE TABLE office (
       id SERIAL PRIMARY KEY,
-      name VARCHAR(120) NOT NULL
+      name VARCHAR(120) UNIQUE NOT NULL
     )
     '''
     execute '''
@@ -46,7 +46,7 @@ class Init < ActiveRecord::Migration
       id SERIAL PRIMARY KEY,
       area INTEGER REFERENCES area(id),
       office INTEGER REFERENCES office(id),
-      uri VARCHAR(1024) NOT NULL,
+      uri VARCHAR(1024) UNIQUE NOT NULL,
       date TIMESTAMP NOT NULL DEFAULT CURRENT_DATE,
       title VARCHAR(1024) NOT NULL
     )

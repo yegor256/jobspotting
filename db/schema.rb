@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(:version => 20140314121338) do
     t.text   "sources",                :null => false
   end
 
+  add_index "area", ["name"], :name => "area_name_key", :unique => true
+
   create_table "job", :force => true do |t|
     t.integer  "area"
     t.integer  "office"
@@ -26,8 +28,12 @@ ActiveRecord::Schema.define(:version => 20140314121338) do
     t.string   "title",  :limit => 1024, :null => false
   end
 
+  add_index "job", ["uri"], :name => "job_uri_key", :unique => true
+
   create_table "office", :force => true do |t|
     t.string "name", :limit => 120, :null => false
   end
+
+  add_index "office", ["name"], :name => "office_name_key", :unique => true
 
 end

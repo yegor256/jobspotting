@@ -36,6 +36,7 @@ GEM
       sax-machine (~> 0.2.1)
     hike (1.2.3)
     i18n (0.6.9)
+    logger (1.2.8)
     loofah (1.2.1)
       nokogiri (>= 1.4.4)
     mail (2.5.4)
@@ -99,6 +100,7 @@ PLATFORMS
 
 DEPENDENCIES
   feedzirra
+  logger
   pg
   psych
   rails

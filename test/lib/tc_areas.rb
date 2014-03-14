@@ -39,8 +39,11 @@ class AreasTest < Test::Unit::TestCase
   def test_create
     db = Database.new.connect
     areas = Areas.new(db)
-    areas.create('first', '')
-    areas.create('second', '')
+    areas.create('first', '{}')
+    areas.create('second', '{}')
     assert_that(areas.all, has_size(greater_than(1)))
+    areas.all.each do |area|
+      assert_instance_of(Area, area)
+    end
   end
 end

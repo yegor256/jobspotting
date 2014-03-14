@@ -36,8 +36,17 @@ class JobsTest < Test::Unit::TestCase
   def test_push
     job = Job.new('#', 'Google', 'Java developer')
     db = Database.new.connect
-    area = Areas.new(db).create('test', '')
+    area = Areas.new(db).create('test', '{}')
     id = Jobs.new(db, area.id).push(job)
     assert_not_nil id
+  end
+  def test_uniqueness
+    job = Job.new('#uri', 'IBM', 'Ruby developer')
+    db = Database.new.connect
+    area = Areas.new(db).create('ruby in SF', '{}')
+    jobs = Jobs.new(db, area.id)
+    first = jobs.push(job)
+    second = jobs.push(job)
+    assert_equal(first, second)
   end
 end

@@ -26,6 +26,7 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
+require 'json'
 require 'sequel'
 require_relative 'area'
 require_relative 'jobs'
@@ -36,15 +37,19 @@ class Areas
   end
   def all
     @db[:area].map { |row|
-      Jobs.new(@db, row[:id])
+      Area.new(@db, row[:id])
     }
   end
   def create(name, sources)
-    Area.new(
-      @db,
-      @db[:area].insert(
-        :name => name, :sources => sources
+    JSON.parse(sources)
+    row = @db[:area].where(:name => name)
+    if 1 == row.update(:sources => sources)
+      id = row.first[:id]
+    else
+      id = @db[:area].insert(
+          :name => name, :sources => sources
       )
-    )
+    end
+    Area.new(@db, id)
   end
 end

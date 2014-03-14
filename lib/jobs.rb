@@ -34,16 +34,32 @@ class Jobs
     @id = id
   end
   def push(job)
-    if @db[:office].where(:name => job.office).empty?
-      @db[:office].insert(
-        :name => job.office
-      )
-    end
-    @db[:job].insert(
+    row = @db[:job].where(:uri => job.uri)
+    updated = row.update(
       :area => @id,
-      :office => 1,
+      :office => self.office(job.office),
       :uri => job.uri,
       :title => job.title
     )
+    if updated == 1
+      id = row.first[:id]
+    else
+      id = @db[:job].insert(
+        :area => @id,
+        :office => self.office(job.office),
+        :uri => job.uri,
+        :title => job.title
+      )
+    end
+    id
+  end
+  def office(name)
+    row = @db[:office].where(:name => name)
+    if row.empty?
+      id = @db[:office].insert(:name => name)
+    else
+      id = row.first[:id]
+    end
+    id
   end
 end
