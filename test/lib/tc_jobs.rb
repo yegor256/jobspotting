@@ -26,19 +26,18 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-require_relative '../../lib/channels/github'
+require_relative '../../lib/areas'
+require_relative '../../lib/job'
+require_relative '../../lib/jobs'
+require_relative '../../lib/database'
 require 'test/unit'
 
-class GithubTest < Test::Unit::TestCase
-  def test_fetch
-    args = {
-      :description => 'java',
-      :location => 'San Francisco'
-    }
-    Github.new(args).fetch do |job|
-      assert_not_nil job.uri
-      assert_not_nil job.title
-      assert_not_nil job.office
-    end
+class JobsTest < Test::Unit::TestCase
+  def test_push
+    job = Job.new('#', 'Google', 'Java developer')
+    db = Database.new.connect
+    area = Areas.new(db).create('test', '')
+    id = Jobs.new(db, area.id).push(job)
+    assert_not_nil id
   end
 end

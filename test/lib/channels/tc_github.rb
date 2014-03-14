@@ -26,21 +26,19 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-require_relative '../lib/areas'
-require_relative '../lib/job'
-require_relative '../lib/jobs'
-require_relative '../lib/database'
+require_relative '../../../lib/channels/github'
 require 'test/unit'
-require 'ramcrest'
 
-class AreasTest < Test::Unit::TestCase
-  include Ramcrest::Comparable
-  include Ramcrest::HasSize
-  def test_create
-    db = Database.new.connect
-    areas = Areas.new(db)
-    areas.create('first', '')
-    areas.create('second', '')
-    assert_that(areas.all, has_size(greater_than(1)))
+class GithubTest < Test::Unit::TestCase
+  def test_fetch
+    args = {
+      description: 'java',
+      location: 'San Francisco'
+    }
+    Github.new(args).fetch do |job|
+      assert_not_nil job.uri
+      assert_not_nil job.title
+      assert_not_nil job.office
+    end
   end
 end

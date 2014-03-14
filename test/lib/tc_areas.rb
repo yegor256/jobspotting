@@ -26,16 +26,21 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-require_relative '../../lib/channels/dice'
+require_relative '../../lib/areas'
+require_relative '../../lib/job'
+require_relative '../../lib/jobs'
+require_relative '../../lib/database'
 require 'test/unit'
+require 'ramcrest'
 
-class DiceTest < Test::Unit::TestCase
-  def test_fetch
-    args = {
-      :query => 'java'
-    }
-    Dice.new(args).fetch do |job|
-      assert_not_nil job
-    end
+class AreasTest < Test::Unit::TestCase
+  include Ramcrest::Comparable
+  include Ramcrest::HasSize
+  def test_create
+    db = Database.new.connect
+    areas = Areas.new(db)
+    areas.create('first', '')
+    areas.create('second', '')
+    assert_that(areas.all, has_size(greater_than(1)))
   end
 end

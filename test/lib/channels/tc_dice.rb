@@ -26,18 +26,16 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-require_relative '../lib/areas'
-require_relative '../lib/job'
-require_relative '../lib/jobs'
-require_relative '../lib/database'
+require_relative '../../../lib/channels/dice'
 require 'test/unit'
 
-class JobsTest < Test::Unit::TestCase
-  def test_push
-    job = Job.new('#', 'Google', 'Java developer')
-    db = Database.new.connect
-    area = Areas.new(db).create('test', '')
-    id = Jobs.new(db, area.id).push(job)
-    assert_not_nil id
+class DiceTest < Test::Unit::TestCase
+  def test_fetch
+    args = {
+      query: 'java'
+    }
+    Dice.new(args).fetch do |job|
+      assert_not_nil job
+    end
   end
 end

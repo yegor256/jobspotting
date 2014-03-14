@@ -29,7 +29,7 @@
 require_relative 'lib/areas'
 require_relative 'lib/database'
 
-db = Database.connect
+db = Database.new.connect
 Areas.new(db).all do |area|
   jobs = area.jobs
   Factory.new.make(area.sources).each do |channel|
