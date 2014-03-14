@@ -16,8 +16,8 @@ class Init < ActiveRecord::Migration
     execute """
     CREATE TABLE job (
       id INTEGER PRIMARY KEY,
-      area INTEGER,
-      office INTEGER,
+      area INTEGER REFERENCES area(id),
+      office INTEGER REFERENCES office(id),
       date TIMESTAMP,
       title VARCHAR(1024)
     )
