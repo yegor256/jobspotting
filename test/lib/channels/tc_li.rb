@@ -26,18 +26,20 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-require_relative '../../../lib/channels/careers'
+require_relative '../../../lib/channels/li'
 require 'test/unit'
 
-class CareersTest < Test::Unit::TestCase
+class LiTest < Test::Unit::TestCase
   def test_fetch
     args = {
-      term: 'java',
-      location: 'San Francisco',
-      range: '30',
-      units: 'miles'
+        key: '77kawns5kugsar',
+        secret: 'f0dTpIv1GbdiUevG',
+        token: 'ab850016-1d99-439a-92d6-81454f0ba018',
+        osecret: '09f3cf5d-4fee-47f9-b246-f39baeafcd79',
+        description: 'java',
+        location: 'San Francisco'
     }
-    Careers.new(args).fetch do |job|
+    Li.new(args).fetch do |job|
       assert_not_nil job.uri
       assert_not_nil job.title
       assert_not_nil job.office

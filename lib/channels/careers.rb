@@ -41,7 +41,7 @@ class Careers
       URI::HTTP.build(
         {
           :scheme => 'http',
-          :host => 'http://careers.stackoverflow.com/',
+          :host => 'careers.stackoverflow.com',
           :path => '/jobs/feed',
           :query => URI.escape(
             {

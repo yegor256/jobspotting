@@ -34,8 +34,13 @@ GEM
       curb (~> 0.8.1)
       loofah (~> 1.2.1)
       sax-machine (~> 0.2.1)
+    hashie (2.0.5)
     hike (1.2.3)
     i18n (0.6.9)
+    linkedin (0.4.6)
+      hashie (>= 1.2, < 2.1)
+      multi_json (~> 1.0)
+      oauth (~> 0.4)
     logger (1.2.8)
     loofah (1.2.1)
       nokogiri (>= 1.4.4)
@@ -48,6 +53,7 @@ GEM
     multi_json (1.9.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
+    oauth (0.4.7)
     pg (0.17.1)
     polyglot (0.3.4)
     psych (2.0.2)
@@ -98,6 +104,7 @@ PLATFORMS
 
 DEPENDENCIES
   feedzirra
+  linkedin
   logger
   pg
   psych

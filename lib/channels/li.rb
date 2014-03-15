@@ -26,21 +26,21 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-require_relative '../../../lib/channels/careers'
-require 'test/unit'
+require_relative '../job'
+require 'linkedin'
 
-class CareersTest < Test::Unit::TestCase
-  def test_fetch
-    args = {
-      term: 'java',
-      location: 'San Francisco',
-      range: '30',
-      units: 'miles'
+class Li
+  def initialize(args)
+    @key = args[:key]
+    @secret = args[:secret]
+    @token = args[:token]
+    @osecret = args[:osecret]
+  end
+  def fetch
+    client = LinkedIn::Client.new(@key, @secret)
+    client.authorize_from_access(@token, @osecret)
+    client.search('java', 'job').entries.map { |entry|
+      Job.new('#', 'unknown', 'title')
     }
-    Careers.new(args).fetch do |job|
-      assert_not_nil job.uri
-      assert_not_nil job.title
-      assert_not_nil job.office
-    end
   end
 end
