@@ -25,9 +25,14 @@
 # STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+# Author:: Yegor Bugayenko (mailto:yegor@tpc2.com)
+# Copyright:: Copyright (c) 2009-2014, Curiost.com
+# License:: Free to use and change if the author is mentioned
 
 require 'sequel'
 
+# Collection of jobs
 class Jobs
   def initialize(db, id)
     @db = db
