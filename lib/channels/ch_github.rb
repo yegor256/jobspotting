@@ -35,8 +35,10 @@ require 'feedzirra'
 
 class ChGithub
   def initialize(args)
-    @description = args[:description]
-    @location = args[:location]
+    @description = args['description']
+    raise 'description is empty' if @description.empty?
+    @location = args['location']
+    raise 'location is empty' if @location.empty?
   end
   def fetch
     Feedzirra::Feed.fetch_and_parse(

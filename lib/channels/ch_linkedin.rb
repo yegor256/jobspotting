@@ -35,10 +35,10 @@ require 'linkedin'
 
 class ChLinkedin
   def initialize(args)
-    @key = args[:key]
-    @secret = args[:secret]
-    @token = args[:token]
-    @osecret = args[:osecret]
+    @key = args['key']
+    @secret = args['secret']
+    @token = args['token']
+    @osecret = args['osecret']
   end
   def fetch
     client = LinkedIn::Client.new(@key, @secret)

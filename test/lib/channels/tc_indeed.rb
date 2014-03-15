@@ -37,10 +37,10 @@ class ChIndeedTest < Test::Unit::TestCase
   def test_fetch
     omit 'see https://github.com/railsware/indeed/issues/4'
     args = {
-      publisher: '2731054374924479',
-      q: 'java',
-      l: 'San Francisco, CA',
-      limit: 2
+      'publisher' => '2731054374924479',
+      'q' => 'java',
+      'l' => 'San Francisco, CA',
+      'limit' => 2
     }
     jobs = ChIndeed.new(args).fetch
     assert_not_equal(jobs.size, 0)

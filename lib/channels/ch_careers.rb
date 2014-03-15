@@ -35,10 +35,14 @@ require 'feedzirra'
 
 class ChCareers
   def initialize(args)
-    @tem = args[:term]
-    @location = args[:location]
-    @range = args[:range]
-    @units = args[:units]
+    @term = args['term']
+    raise 'description is empty' if @term.empty?
+    @location = args['location']
+    raise 'description is empty' if @location.empty?
+    @range = args['range']
+    raise 'description is empty' if @range.empty?
+    @units = args['units']
+    raise 'description is empty' if @units.empty?
   end
   def fetch
     Feedzirra::Feed.fetch_and_parse(
@@ -49,7 +53,7 @@ class ChCareers
           :path => '/jobs/feed',
           :query => URI.escape(
             {
-              'searchTerm' => @description,
+              'searchTerm' => @term,
               'location' => @location,
               'range' => @range,
               'distanceUnits' => @units

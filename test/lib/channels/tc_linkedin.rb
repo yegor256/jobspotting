@@ -37,12 +37,12 @@ class ChLinkedinTest < Test::Unit::TestCase
   def test_fetch
     omit 'not implemented yet'
     args = {
-        key: '77kawns5kugsar',
-        secret: 'f0dTpIv1GbdiUevG',
-        token: 'ab850016-1d99-439a-92d6-81454f0ba018',
-        osecret: '09f3cf5d-4fee-47f9-b246-f39baeafcd79',
-        description: 'java',
-        location: 'San Francisco'
+        'key' => '77kawns5kugsar',
+        'secret' => 'f0dTpIv1GbdiUevG',
+        'token' => 'ab850016-1d99-439a-92d6-81454f0ba018',
+        'osecret' => '?',
+        'description' => 'java',
+        'location' => 'San Francisco'
     }
     ChLinkedin.new(args).fetch do |job|
       assert_not_nil job.uri

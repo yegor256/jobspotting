@@ -36,10 +36,10 @@ require 'test/unit'
 class ChCareersTest < Test::Unit::TestCase
   def test_fetch
     args = {
-      term: 'java',
-      location: 'San Francisco',
-      range: '30',
-      units: 'miles'
+      'term' => 'java',
+      'location' => 'San Francisco',
+      'range' => '30',
+      'units' => 'miles'
     }
     ChCareers.new(args).fetch.each do |job|
       assert_not_nil job.uri

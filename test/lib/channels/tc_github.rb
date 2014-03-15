@@ -36,8 +36,8 @@ require 'test/unit'
 class ChGithubTest < Test::Unit::TestCase
   def test_fetch
     args = {
-      description: 'java',
-      location: 'San Francisco'
+      'description' => 'java',
+      'location' => 'San Francisco'
     }
     ChGithub.new(args).fetch.each do |job|
       assert_not_nil job.uri

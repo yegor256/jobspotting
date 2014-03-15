@@ -33,6 +33,7 @@
 require_relative 'ch_careers'
 require_relative 'ch_dice'
 require_relative 'ch_github'
+require_relative 'ch_indeed'
 require_relative 'ch_linkedin'
 require 'json'
 

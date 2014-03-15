@@ -37,7 +37,7 @@ class ChDiceTest < Test::Unit::TestCase
   def test_fetch
     omit 'not implemented yet'
     args = {
-      query: 'java'
+      'query' => 'java'
     }
     ChDice.new(args).fetch do |job|
       assert_not_nil job
