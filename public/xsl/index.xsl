@@ -7,9 +7,9 @@
   </xsl:template>
   <xsl:template match="page" mode="body">
     <h1>
-      <xsl:text>Areas</xsl:text>
+      <xsl:text>Job-spotting areas:</xsl:text>
     </h1>
-    <div class="row">
+    <div class="row" style="margin-bottom: 1em;">
       <div class="col-12 col-sm-6 col-lg-4">
         <form action="" method="post">
           <fieldset>

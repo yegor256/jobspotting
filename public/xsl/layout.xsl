@@ -19,7 +19,7 @@
         <xsl:apply-template select="." mode="head"/>
       </head>
       <body>
-        <div class="container-fluid" style="margin-top: 1em;">
+        <div class="container-fluid" style="margin: 2em;">
           <a href="/">
             <img src="http://img.curiost.com/logo.png" style="width:60px; height:60px;"/>
           </a>
