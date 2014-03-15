@@ -45,7 +45,7 @@ class Area
   end
 
   def total
-    @db[:area].where(:id => @id).count
+    @db[:job].where(:area => @id).count
   end
 
   def name
