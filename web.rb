@@ -39,6 +39,12 @@ get '/' do
   erb :index
 end
 
+post '/' do
+  @areas = Areas.new(Database.new.connect)
+  @areas.create(params[:name], '{}')
+  redirect '/'
+end
+
 get '/area/:id' do |id|
   @areas = Areas.new(Database.new.connect)
   @area = @areas.get(id)
