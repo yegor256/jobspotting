@@ -26,7 +26,11 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
+require_relative 'lib/database'
 require 'rake/testtask'
+require 'sequel'
+
+task :default => [:test]
 
 Rake::TestTask.new do |t|
   t.libs << 'test'
@@ -34,4 +38,12 @@ Rake::TestTask.new do |t|
   t.verbose = true
 end
 
-task :default => [:test]
+namespace :db do
+  task :migrate do
+    Sequel.extension :migration
+    db = Database.new.connect
+    desc 'Apply migrations to the database'
+    Sequel::Migrator.run(db, 'db/migrate')
+    puts '<= sq:migrate executed'
+  end
+end
