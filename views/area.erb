@@ -5,7 +5,7 @@
   <sources><%= @area.sources %></sources>
   <offices>
     <% for office in @area.offices.top %>
-      <office>
+      <office id="<%= office[:id] %>">
         <name><%= office[:name] %></name>
         <jobs><%= office[:jobs] %></jobs>
         <link rel="see" href="/office/<%= office[:id] %>"/>

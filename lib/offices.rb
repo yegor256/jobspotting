@@ -44,7 +44,7 @@ class Offices
   def top
     @db[:office]
       .select(:office__id)
-      .select(:office__name)
+      .select_more(:office__name)
       .select_more{Sequel.as(count(:job__id), :jobs)}
       .join(:job, :office => :id)
       .where(:area => @area)
