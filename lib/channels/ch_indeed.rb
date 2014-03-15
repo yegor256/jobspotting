@@ -34,12 +34,15 @@ require_relative '../job'
 require 'indeed'
 
 class ChIndeed
+
   def initialize(args)
     @args = args
   end
+
   def fetch
     Indeed.new.search(@args).map { |entry|
       Job.new(entry['url'], entry['company'], entry['jobtitle'])
     }
   end
+
 end

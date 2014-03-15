@@ -34,12 +34,14 @@ require_relative '../job'
 require 'linkedin'
 
 class ChLinkedin
+
   def initialize(args)
     @key = args['key']
     @secret = args['secret']
     @token = args['token']
     @osecret = args['osecret']
   end
+
   def fetch
     client = LinkedIn::Client.new(@key, @secret)
     client.authorize_from_access(@token, @osecret)
@@ -47,4 +49,5 @@ class ChLinkedin
       Job.new('#', 'unknown', 'title')
     }
   end
+
 end

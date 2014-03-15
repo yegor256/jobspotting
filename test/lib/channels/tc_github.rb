@@ -34,6 +34,7 @@ require_relative '../../../lib/channels/ch_github'
 require 'test/unit'
 
 class ChGithubTest < Test::Unit::TestCase
+
   def test_fetch
     args = {
       'description' => 'java',
@@ -45,4 +46,5 @@ class ChGithubTest < Test::Unit::TestCase
       assert_not_nil job.office
     end
   end
+
 end

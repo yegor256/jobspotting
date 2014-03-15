@@ -34,6 +34,7 @@ require_relative '../../../lib/channels/ch_careers'
 require 'test/unit'
 
 class ChCareersTest < Test::Unit::TestCase
+
   def test_fetch
     args = {
       'term' => 'java',
@@ -47,4 +48,5 @@ class ChCareersTest < Test::Unit::TestCase
       assert_not_nil job.office
     end
   end
+
 end

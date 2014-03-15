@@ -34,6 +34,7 @@ require_relative '../../../lib/channels/ch_dice'
 require 'test/unit'
 
 class ChDiceTest < Test::Unit::TestCase
+
   def test_fetch
     omit 'not implemented yet'
     args = {
@@ -43,4 +44,5 @@ class ChDiceTest < Test::Unit::TestCase
       assert_not_nil job
     end
   end
+
 end

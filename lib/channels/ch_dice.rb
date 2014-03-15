@@ -31,11 +31,14 @@
 # License:: Free to use and change if the author is mentioned
 
 class ChDice
+
   def initialize(args)
     # todo
   end
+
   def fetch
     # todo
     []
   end
+
 end

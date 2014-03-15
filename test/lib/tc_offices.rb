@@ -38,9 +38,11 @@ require 'test/unit'
 require 'ramcrest'
 
 class OfficesTest < Test::Unit::TestCase
+
   include MiniTest::Assertions
   include Ramcrest::Comparable
   include Ramcrest::HasSize
+
   def test_create
     db = Database.new.connect
     json = '{"hey": 1}'
@@ -50,4 +52,5 @@ class OfficesTest < Test::Unit::TestCase
     assert_that(offices.top, has_size(greater_or_equal_to(1)))
     assert_that(offices.top.first[:jobs], greater_or_equal_to(1))
   end
+
 end

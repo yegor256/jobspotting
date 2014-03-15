@@ -34,6 +34,7 @@ require_relative '../../../lib/channels/ch_indeed'
 require 'test/unit'
 
 class ChIndeedTest < Test::Unit::TestCase
+
   def test_fetch
     omit 'see https://github.com/railsware/indeed/issues/4'
     args = {
@@ -50,4 +51,5 @@ class ChIndeedTest < Test::Unit::TestCase
       assert_not_nil job.office
     end
   end
+
 end

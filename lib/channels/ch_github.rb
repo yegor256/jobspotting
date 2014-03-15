@@ -34,12 +34,14 @@ require_relative '../job'
 require 'feedzirra'
 
 class ChGithub
+
   def initialize(args)
     @description = args['description']
     raise 'description is empty' if @description.empty?
     @location = args['location']
     raise 'location is empty' if @location.empty?
   end
+
   def fetch
     Feedzirra::Feed.fetch_and_parse(
       URI::HTTP.build(
@@ -66,4 +68,5 @@ class ChGithub
       Job.new(entry.url, office, title)
     }
   end
+
 end

@@ -34,6 +34,7 @@ require_relative '../job'
 require 'feedzirra'
 
 class ChCareers
+
   def initialize(args)
     @term = args['term']
     raise 'description is empty' if @term.empty?
@@ -44,6 +45,7 @@ class ChCareers
     @units = args['units']
     raise 'description is empty' if @units.empty?
   end
+
   def fetch
     Feedzirra::Feed.fetch_and_parse(
       URI::HTTP.build(
@@ -72,4 +74,5 @@ class ChCareers
       Job.new(entry.url, office, title)
     }
   end
+
 end

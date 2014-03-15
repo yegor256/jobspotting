@@ -31,10 +31,13 @@
 # License:: Free to use and change if the author is mentioned
 
 class Job
+
   attr_accessor :uri, :office, :title
+
   def initialize(uri, office, title)
     @uri = uri
     @office = office
     @title = title
   end
+
 end

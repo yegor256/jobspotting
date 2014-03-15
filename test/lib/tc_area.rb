@@ -37,6 +37,7 @@ require_relative '../../lib/database'
 require 'test/unit'
 
 class AreaTest < Test::Unit::TestCase
+
   def test_create
     db = Database.new.connect
     json = '{"hey": 1}'
@@ -44,4 +45,5 @@ class AreaTest < Test::Unit::TestCase
     assert_equal(area.name, 'first')
     assert_equal(area.sources, json)
   end
+
 end

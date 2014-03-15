@@ -38,6 +38,7 @@ require 'test/unit'
 require 'rack/test'
 
 class WebTest < Test::Unit::TestCase
+
   include Rack::Test::Methods
 
   def app
@@ -53,4 +54,5 @@ class WebTest < Test::Unit::TestCase
     get '/area/1'
     assert_match(/<page>/, last_response.body)
   end
+
 end

@@ -38,9 +38,11 @@ require 'test/unit'
 require 'ramcrest'
 
 class AreasTest < Test::Unit::TestCase
+
   include MiniTest::Assertions
   include Ramcrest::Comparable
   include Ramcrest::HasSize
+
   def test_create
     db = Database.new.connect
     areas = Areas.new(db)
@@ -51,4 +53,5 @@ class AreasTest < Test::Unit::TestCase
       assert_instance_of(Area, area)
     end
   end
+
 end

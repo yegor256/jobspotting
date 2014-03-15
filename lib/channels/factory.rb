@@ -38,9 +38,11 @@ require_relative 'ch_linkedin'
 require 'json'
 
 class Factory
+
   def make(json)
     JSON.parse(json).map do |key, value|
       Kernel.const_get(key).new(value)
     end
   end
+
 end

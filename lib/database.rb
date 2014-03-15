@@ -34,6 +34,7 @@ require 'sequel'
 require 'yaml'
 
 class Database
+
   def connect
     path = File.expand_path(
       File.join(
@@ -45,4 +46,5 @@ class Database
       ENV['DATABASE_URL'] || YAML.load_file(path)['dev']
     )
   end
+
 end

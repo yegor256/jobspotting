@@ -34,23 +34,30 @@ require_relative 'jobs'
 require_relative 'offices'
 
 class Area
+
   def initialize(db, id)
     @db = db
     @id = id
   end
+
   def id
     @id
   end
+
   def name
     @db[:area].where(:id => @id).first[:name]
   end
+
   def sources
     @db[:area].where(:id => @id).first[:sources]
   end
+
   def jobs
     Jobs.new(@db, @id)
   end
+
   def offices
     Offices.new(@db, @id)
   end
+
 end

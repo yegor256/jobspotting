@@ -37,6 +37,7 @@ require_relative '../../lib/database'
 require 'test/unit'
 
 class JobsTest < Test::Unit::TestCase
+
   def test_push
     job = Job.new('#', 'Google', 'Java developer')
     db = Database.new.connect
@@ -44,6 +45,7 @@ class JobsTest < Test::Unit::TestCase
     id = Jobs.new(db, area.id).push(job)
     assert_not_nil id
   end
+
   def test_uniqueness
     job = Job.new('#uri', 'IBM', 'Ruby developer')
     db = Database.new.connect
@@ -53,4 +55,5 @@ class JobsTest < Test::Unit::TestCase
     second = jobs.push(job)
     assert_equal(first, second)
   end
+
 end

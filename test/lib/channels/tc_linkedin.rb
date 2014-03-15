@@ -34,6 +34,7 @@ require_relative '../../../lib/channels/ch_linkedin'
 require 'test/unit'
 
 class ChLinkedinTest < Test::Unit::TestCase
+
   def test_fetch
     omit 'not implemented yet'
     args = {
@@ -50,4 +51,5 @@ class ChLinkedinTest < Test::Unit::TestCase
       assert_not_nil job.office
     end
   end
+
 end

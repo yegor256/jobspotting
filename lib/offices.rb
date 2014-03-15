@@ -35,10 +35,12 @@ require_relative 'area'
 require_relative 'jobs'
 
 class Offices
+
   def initialize(db, area)
     @db = db
     @area = area
   end
+
   def top
     @db[:office]
       .select(:office__id)
@@ -50,4 +52,5 @@ class Offices
       .reverse_order(:jobs)
       .map { |row| {id: row[:id], name: row[:name], jobs: row[:jobs]} }
   end
+
 end
