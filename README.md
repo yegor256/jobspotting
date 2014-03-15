@@ -8,6 +8,7 @@ We're spotting these sites (through their APIs):
  * [glassdoor.com](http://www.glassdoor.com): [API](http://www.glassdoor.com/api/index.htm)
  * [craigslist.com](http://www.craigslist.com): [RSS](http://sfbay.craigslist.org/sof/index.rss)
  * [linkedin.com](http://www.linkedin.com): [API](https://developer.linkedin.com/apis#jobs)
+ * [indeed.com](http://www.indeed.com): [API](https://ads.indeed.com/jobroll/xmlfeed)
  
 Every few minutes we check what's new and store every new job in PostgreSQL tables:
 
@@ -33,6 +34,5 @@ Every area is configured with JSON, for example:
   "github": {
     "keyword": "java"
   },
-  ...
 }
 ```
