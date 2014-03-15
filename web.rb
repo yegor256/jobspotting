@@ -32,6 +32,7 @@
 
 require_relative 'lib/areas'
 require_relative 'lib/database'
+require_relative 'lib/office'
 require 'rubygems'
 require 'bundler/setup'
 require 'sinatra'
@@ -70,8 +71,8 @@ post '/area/:id' do |id|
 end
 
 get '/office/:id' do |id|
-  @area = Areas.new(db).get(id)
-  erb :area
+  @office = Office.new(db, id)
+  erb :office
 end
 
 db.disconnect
