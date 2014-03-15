@@ -50,7 +50,8 @@ class Offices
       .where(:area => @area)
       .group(:office__id)
       .reverse_order(:jobs)
-      .map { |row| {id: row[:id], name: row[:name], jobs: row[:jobs]} }
+      .limit(100)
+      .all
   end
 
 end
