@@ -26,21 +26,23 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-require_relative 'lib/areas'
-require_relative 'lib/database'
-require 'rubygems'
-require 'bundler/setup'
-require 'sinatra'
+require 'json'
+require 'sequel'
+require_relative 'area'
+require_relative 'jobs'
 
-set :erb, :content_type => 'text/xml'
-
-get '/' do
-  @areas = Areas.new(Database.new.connect)
-  erb :index
-end
-
-get '/area/:id' do |id|
-  @areas = Areas.new(Database.new.connect)
-  @area = @areas.get(id)
-  erb :area
+class Offices
+  def initialize(db, area)
+    @db = db
+    @area = area
+  end
+  def top
+    @db[:office]
+      .select(:office__id)
+      .select(:office__name)
+      .join(:job, :office => :id)
+      .where(:area => @area)
+      .group(:office__id)
+      .map { |row| {id: row[:id], name: row[:name]} }
+  end
 end

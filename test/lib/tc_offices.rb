@@ -26,21 +26,22 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-require_relative 'lib/areas'
-require_relative 'lib/database'
-require 'rubygems'
-require 'bundler/setup'
-require 'sinatra'
+require_relative '../../lib/areas'
+require_relative '../../lib/job'
+require_relative '../../lib/jobs'
+require_relative '../../lib/database'
+require 'test/unit'
+require 'ramcrest'
 
-set :erb, :content_type => 'text/xml'
-
-get '/' do
-  @areas = Areas.new(Database.new.connect)
-  erb :index
-end
-
-get '/area/:id' do |id|
-  @areas = Areas.new(Database.new.connect)
-  @area = @areas.get(id)
-  erb :area
+class OfficesTest < Test::Unit::TestCase
+  include Ramcrest::Comparable
+  include Ramcrest::HasSize
+  def test_create
+    db = Database.new.connect
+    json = '{"hey": 1}'
+    area = Areas.new(db).create('offices_test', json)
+    area.jobs.push(Job.new('#uri', 'IBM', 'Ruby developer'))
+    offices = area.offices
+    assert_that(offices.top, has_size(greater_or_equal_to(1)))
+  end
 end

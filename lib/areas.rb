@@ -40,6 +40,9 @@ class Areas
       Area.new(@db, row[:id])
     }
   end
+  def get(id)
+    Area.new(@db, id)
+  end
   def create(name, sources)
     JSON.parse(sources)
     row = @db[:area].where(:name => name)

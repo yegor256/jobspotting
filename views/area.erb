@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="/xsl/area.xsl" type="text/xsl"?>
+<page>
+  <offices>
+    <% for office in @area.offices.top %>
+      <office>
+        <name><%= office[:name] %></name>
+      </office>
+    <% end %>
+  </offices>
+</page>

@@ -26,21 +26,24 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-require_relative 'lib/areas'
-require_relative 'lib/database'
-require 'rubygems'
-require 'bundler/setup'
-require 'sinatra'
+require_relative '../web'
+require 'test/unit'
+require 'rack/test'
 
-set :erb, :content_type => 'text/xml'
+class WebTest < Test::Unit::TestCase
+  include Rack::Test::Methods
 
-get '/' do
-  @areas = Areas.new(Database.new.connect)
-  erb :index
-end
+  def app
+    Sinatra::Application
+  end
 
-get '/area/:id' do |id|
-  @areas = Areas.new(Database.new.connect)
-  @area = @areas.get(id)
-  erb :area
+  def test_index
+    get '/'
+    assert_equal 'Hello World!', last_response.body
+  end
+
+  def test_with_params
+    get '/area', :id => '1'
+    assert_equal 'Hello Frank!', last_response.body
+  end
 end

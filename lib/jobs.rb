@@ -37,7 +37,7 @@ class Jobs
     row = @db[:job].where(:uri => job.uri)
     updated = row.update(
       :area => @id,
-      :office => self.office(job.office),
+      :office => office(job.office),
       :uri => job.uri,
       :title => job.title
     )
@@ -53,6 +53,7 @@ class Jobs
     end
     id
   end
+  private
   def office(name)
     row = @db[:office].where(:name => name)
     if row.empty?
