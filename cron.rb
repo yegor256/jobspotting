@@ -51,7 +51,7 @@ Areas.new(db).all.each do |area|
     total = 0
     channel.fetch.each do |job|
       jobs.push(job)
-      ++total
+      total += 1
     end
     logger.info("  fetched #{channel.class.name}: #{total} jobs")
   end
