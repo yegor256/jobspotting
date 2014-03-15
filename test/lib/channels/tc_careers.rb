@@ -26,10 +26,10 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-require_relative '../../../lib/channels/careers'
+require_relative '../../../lib/channels/ch_careers'
 require 'test/unit'
 
-class CareersTest < Test::Unit::TestCase
+class ChCareersTest < Test::Unit::TestCase
   def test_fetch
     args = {
       term: 'java',
@@ -37,7 +37,7 @@ class CareersTest < Test::Unit::TestCase
       range: '30',
       units: 'miles'
     }
-    Careers.new(args).fetch do |job|
+    ChCareers.new(args).fetch do |job|
       assert_not_nil job.uri
       assert_not_nil job.title
       assert_not_nil job.office

@@ -27,13 +27,13 @@
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
 require_relative '../../../lib/channels/factory'
-require_relative '../../../lib/channels/github'
+require_relative '../../../lib/channels/ch_github'
 require 'test/unit'
 
 class FactoryTest < Test::Unit::TestCase
   def test_make
-    json = '{"Github": {"description": "java", "location": "San Francisco"}}'
+    json = '{"ChGithub": {"description": "java", "location": "San Francisco"}}'
     channel = Factory.new.make(json).first
-    assert_instance_of(Github, channel)
+    assert_instance_of(ChGithub, channel)
   end
 end

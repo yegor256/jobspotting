@@ -26,7 +26,10 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
+ENV['RACK_ENV'] = 'test'
+
 require_relative '../web'
+require 'sinatra'
 require 'test/unit'
 require 'rack/test'
 

@@ -32,12 +32,14 @@ require 'rubygems'
 require 'bundler/setup'
 require 'sinatra'
 
-use Rack::Auth::Basic, 'jobspotting' do |username, password|
-  username == 'yegor' &&
-    Digest::MD5.hexdigest(password) == '2a3dfa66c2d8e8c67b77f2a25886e3cf'
-end
-
 set :erb, :content_type => 'text/xml'
+
+if ENV['RACK_ENV'] != 'test'
+  use Rack::Auth::Basic, 'jobspotting' do |username, password|
+    username == 'yegor' &&
+        Digest::MD5.hexdigest(password) == '2a3dfa66c2d8e8c67b77f2a25886e3cf'
+  end
+end
 
 get '/' do
   @areas = Areas.new(Database.new.connect)
@@ -60,4 +62,3 @@ post '/area/:id' do |id|
   areas.create(area.name, params[:sources])
   redirect "/area/#{id}"
 end
-

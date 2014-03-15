@@ -26,16 +26,16 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-require_relative '../../../lib/channels/github'
+require_relative '../../../lib/channels/ch_github'
 require 'test/unit'
 
-class GithubTest < Test::Unit::TestCase
+class ChGithubTest < Test::Unit::TestCase
   def test_fetch
     args = {
       description: 'java',
       location: 'San Francisco'
     }
-    Github.new(args).fetch do |job|
+    ChGithub.new(args).fetch do |job|
       assert_not_nil job.uri
       assert_not_nil job.title
       assert_not_nil job.office
