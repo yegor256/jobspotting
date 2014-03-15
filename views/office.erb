@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="/xsl/office.xsl" type="text/xsl"?>
 <page>
-  <name><%= @office.name %></name>
+  <name><%= CGI.escapeHTML(@office.name) %></name>
   <jobs>
     <% for job in @office.jobs %>
         <job>
-          <title><%= job[:title] %></title>
-          <uri><%= job[:uri] %></uri>
+          <title><%= CGI.escapeHTML(job[:title]) %></title>
+          <uri><%= CGI.escapeHTML(job[:uri]) %></uri>
         </job>
     <% end %>
   </jobs>

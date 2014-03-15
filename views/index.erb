@@ -4,7 +4,7 @@
   <areas>
     <% for area in @areas.all %>
       <area>
-        <name><%= area.name %></name>
+        <name><%= CGI.escapeHTML(area.name) %></name>
         <total><%= area.total %></total>
         <link rel="see" href="/area/<%= area.id %>"/>
       </area>

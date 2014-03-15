@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="/xsl/area.xsl" type="text/xsl"?>
 <page>
-  <name><%= @area.name %></name>
-  <sources><%= @area.sources %></sources>
+  <name><%= CGI.escapeHTML(@area.name) %></name>
+  <sources><%= CGI.escapeHTML(@area.sources) %></sources>
   <offices>
     <% for office in @area.offices.top %>
       <office id="<%= office[:id] %>">
-        <name><%= office[:name] %></name>
+        <name><%= CGI.escapeHTML(office[:name]) %></name>
         <jobs><%= office[:jobs] %></jobs>
         <link rel="see" href="/office/<%= office[:id] %>"/>
       </office>
