@@ -45,24 +45,28 @@ if ENV['RACK_ENV'] != 'test'
   end
 end
 
+db = Database.new.connect
+
 get '/' do
-  @areas = Areas.new(Database.new.connect)
+  @areas = Areas.new(db)
   erb :index
 end
 
 post '/' do
-  Areas.new(Database.new.connect).create(params[:name], '{}')
+  Areas.new(db).create(params[:name], '{}')
   redirect '/'
 end
 
 get '/area/:id' do |id|
-  @area = Areas.new(Database.new.connect).get(id)
+  @area = Areas.new(db).get(id)
   erb :area
 end
 
 post '/area/:id' do |id|
-  areas = Areas.new(Database.new.connect)
+  areas = Areas.new(db)
   area = areas.get(id)
   areas.create(area.name, params[:sources])
   redirect "/area/#{id}"
 end
+
+db.disconnect

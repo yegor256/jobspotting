@@ -57,5 +57,7 @@ Areas.new(db).all.each do |area|
   end
 end
 
+db.disconnect
+
 logger.info('Done, thanks!')
 
