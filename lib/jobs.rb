@@ -35,9 +35,10 @@ class Jobs
   end
   def push(job)
     row = @db[:job].where(:uri => job.uri)
+    office = office(job.office)
     updated = row.update(
       :area => @id,
-      :office => office(job.office),
+      :office => office,
       :uri => job.uri,
       :title => job.title
     )
@@ -46,7 +47,7 @@ class Jobs
     else
       id = @db[:job].insert(
         :area => @id,
-        :office => self.office(job.office),
+        :office => office,
         :uri => job.uri,
         :title => job.title
       )

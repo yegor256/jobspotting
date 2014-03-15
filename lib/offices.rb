@@ -40,9 +40,11 @@ class Offices
     @db[:office]
       .select(:office__id)
       .select(:office__name)
+      .select_more{Sequel.as(count(:job__id), :jobs)}
       .join(:job, :office => :id)
       .where(:area => @area)
       .group(:office__id)
-      .map { |row| {id: row[:id], name: row[:name]} }
+      .reverse_order(:jobs)
+      .map { |row| {id: row[:id], name: row[:name], jobs: row[:jobs]} }
   end
 end

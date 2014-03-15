@@ -43,5 +43,6 @@ class OfficesTest < Test::Unit::TestCase
     area.jobs.push(Job.new('#uri', 'IBM', 'Ruby developer'))
     offices = area.offices
     assert_that(offices.top, has_size(greater_or_equal_to(1)))
+    assert_that(offices.top.first[:jobs], greater_or_equal_to(1))
   end
 end

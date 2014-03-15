@@ -14,6 +14,8 @@
   <xsl:template match="offices/office">
     <p>
       <xsl:value-of select="name"/>
+      <xsl:text>: </xsl:text>
+      <xsl:value-of select="jobs"/>
     </p>
   </xsl:template>
 </xsl:stylesheet>
