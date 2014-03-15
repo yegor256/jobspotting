@@ -44,6 +44,10 @@ class Area
     @id
   end
 
+  def total
+    @db[:area].where(:id => @id).count
+  end
+
   def name
     @db[:area].where(:id => @id).first[:name]
   end

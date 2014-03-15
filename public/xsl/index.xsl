@@ -35,6 +35,9 @@
         </xsl:attribute>
         <xsl:value-of select="name"/>
       </a>
+      <xsl:text> (</xsl:text>
+      <xsl:value-of select="total"/>
+      <xsl:text>)</xsl:text>
     </p>
   </xsl:template>
 </xsl:stylesheet>
