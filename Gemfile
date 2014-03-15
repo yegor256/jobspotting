@@ -29,12 +29,11 @@
 source 'https://rubygems.org'
 ruby '2.1.0'
 
+gem 'rails'
 gem 'rake'
 gem 'sinatra', '1.1.0'
 gem 'pg'
 gem 'feedzirra'
-gem 'rails'
-gem 'standalone_migrations'
 gem 'sequel'
 gem 'psych'
 gem 'ramcrest'

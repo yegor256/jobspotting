@@ -1,4 +1,4 @@
-development:
+dev:
   adapter: postgres
   server: localhost
   database: jobspotting
@@ -6,13 +6,3 @@ development:
   timeout: 5000
   username: curiost
   password: curiost
-
-production:
-  adapter: postgres
-  server: -heroku-
-  encoding: utf8
-  reconnect: false
-  database: -heroku-
-  pool: 5
-  username: -heroku-
-  password: -heroku-

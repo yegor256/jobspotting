@@ -39,11 +39,11 @@ class WebTest < Test::Unit::TestCase
 
   def test_index
     get '/'
-    assert_equal 'Hello World!', last_response.body
+    assert_match(/<page>/, last_response.body)
   end
 
   def test_with_params
-    get '/area', :id => '1'
-    assert_equal 'Hello Frank!', last_response.body
+    get '/area/1'
+    assert_match(/<page>/, last_response.body)
   end
 end

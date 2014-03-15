@@ -84,8 +84,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
-    standalone_migrations (2.0.4)
-      standalone_migrations
     thor (0.18.1)
     thread_safe (0.2.0)
       atomic (>= 1.1.7, < 2)
@@ -108,4 +106,3 @@ DEPENDENCIES
   ramcrest
   sequel
   sinatra (= 1.1.0)
-  standalone_migrations

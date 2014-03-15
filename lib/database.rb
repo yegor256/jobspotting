@@ -38,7 +38,7 @@ class Database
       )
     )
     Sequel.connect(
-      YAML.load_file(path)['development']
+      ENV['DATABASE_URL'] || YAML.load_file(path)['dev']
     )
   end
 end

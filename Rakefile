@@ -26,29 +26,7 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-require 'standalone_migrations'
 require 'rake/testtask'
-
-StandaloneMigrations::Tasks.load_tasks
-
-# this is required in order to parse DATABASE_URL from
-# heroku and configure DB data for migration
-StandaloneMigrations::Configurator.environments_config do |env|
-  env.on 'production' do
-    if ENV['DATABASE_URL']
-      db = URI.parse(ENV['DATABASE_URL'])
-      return {
-        adapter: 'postgresql',
-        host: db.host,
-        username: db.user,
-        password: db.password,
-        database: db.path[1..-1],
-        encoding: 'utf8'
-      }
-    end
-    nil
-  end
-end
 
 Rake::TestTask.new do |t|
   t.libs << 'test'
