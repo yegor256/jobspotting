@@ -31,7 +31,7 @@ require 'test/unit'
 
 class ChLinkedinTest < Test::Unit::TestCase
   def test_fetch
-    skip 'not implemented yet'
+    omit 'not implemented yet'
     args = {
         key: '77kawns5kugsar',
         secret: 'f0dTpIv1GbdiUevG',

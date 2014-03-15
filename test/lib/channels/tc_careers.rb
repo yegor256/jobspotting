@@ -37,7 +37,7 @@ class ChCareersTest < Test::Unit::TestCase
       range: '30',
       units: 'miles'
     }
-    ChCareers.new(args).fetch do |job|
+    ChCareers.new(args).fetch.each do |job|
       assert_not_nil job.uri
       assert_not_nil job.title
       assert_not_nil job.office

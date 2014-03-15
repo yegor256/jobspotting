@@ -26,24 +26,16 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-require_relative '../../lib/areas'
-require_relative '../../lib/job'
-require_relative '../../lib/jobs'
-require_relative '../../lib/database'
-require 'test/unit'
-require 'ramcrest'
+require_relative '../job'
+require 'indeed'
 
-class OfficesTest < Test::Unit::TestCase
-  include MiniTest::Assertions
-  include Ramcrest::Comparable
-  include Ramcrest::HasSize
-  def test_create
-    db = Database.new.connect
-    json = '{"hey": 1}'
-    area = Areas.new(db).create('offices_test', json)
-    area.jobs.push(Job.new('#uri', 'IBM', 'Ruby developer'))
-    offices = area.offices
-    assert_that(offices.top, has_size(greater_or_equal_to(1)))
-    assert_that(offices.top.first[:jobs], greater_or_equal_to(1))
+class ChIndeed
+  def initialize(args)
+    @args = args
+  end
+  def fetch
+    Indeed.new.search(@args).map { |entry|
+      Job.new(entry['url'], entry['company'], entry['jobtitle'])
+    }
   end
 end

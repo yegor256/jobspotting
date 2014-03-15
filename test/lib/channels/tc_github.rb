@@ -35,7 +35,7 @@ class ChGithubTest < Test::Unit::TestCase
       description: 'java',
       location: 'San Francisco'
     }
-    ChGithub.new(args).fetch do |job|
+    ChGithub.new(args).fetch.each do |job|
       assert_not_nil job.uri
       assert_not_nil job.title
       assert_not_nil job.office

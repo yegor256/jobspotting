@@ -31,7 +31,7 @@ require 'test/unit'
 
 class ChDiceTest < Test::Unit::TestCase
   def test_fetch
-    skip 'not implemented yet'
+    omit 'not implemented yet'
     args = {
       query: 'java'
     }

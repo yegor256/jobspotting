@@ -26,24 +26,24 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-require_relative '../../lib/areas'
-require_relative '../../lib/job'
-require_relative '../../lib/jobs'
-require_relative '../../lib/database'
+require_relative '../../../lib/channels/ch_indeed'
 require 'test/unit'
-require 'ramcrest'
 
-class OfficesTest < Test::Unit::TestCase
-  include MiniTest::Assertions
-  include Ramcrest::Comparable
-  include Ramcrest::HasSize
-  def test_create
-    db = Database.new.connect
-    json = '{"hey": 1}'
-    area = Areas.new(db).create('offices_test', json)
-    area.jobs.push(Job.new('#uri', 'IBM', 'Ruby developer'))
-    offices = area.offices
-    assert_that(offices.top, has_size(greater_or_equal_to(1)))
-    assert_that(offices.top.first[:jobs], greater_or_equal_to(1))
+class ChIndeedTest < Test::Unit::TestCase
+  def test_fetch
+    omit 'see https://github.com/railsware/indeed/issues/4'
+    args = {
+      publisher: '2731054374924479',
+      q: 'java',
+      l: 'San Francisco, CA',
+      limit: 2
+    }
+    jobs = ChIndeed.new(args).fetch
+    assert_not_equal(jobs.size, 0)
+    jobs.each do |job|
+      assert_not_nil job.uri
+      assert_not_nil job.title
+      assert_not_nil job.office
+    end
   end
 end
