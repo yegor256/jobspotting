@@ -38,6 +38,10 @@ Rake::TestTask.new do |t|
   t.verbose = true
 end
 
+task :cron do
+  ruby 'cron.rb'
+end
+
 namespace :db do
   task :migrate do
     Sequel.extension :migration
