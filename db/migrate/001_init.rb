@@ -26,8 +26,8 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-class Init < ActiveRecord::Migration
-  def up
+Sequel.migration do
+  up do
     execute '''
     CREATE TABLE area (
       id SERIAL PRIMARY KEY,
@@ -53,7 +53,7 @@ class Init < ActiveRecord::Migration
     '''
   end
 
-  def down
+  down do
     execute 'DROP TABLE job'
     execute 'DROP TABLE office'
     execute 'DROP TABLE area'

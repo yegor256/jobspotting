@@ -41,7 +41,7 @@ logger.info('Ready to go...')
 db = Database.new.connect
 
 Areas.new(db).all.each do |area|
-  logger.info("area: #{area.name}")
+  logger.info("area #{area.name}")
   jobs = area.jobs
   Factory.new.make(area.sources).each do |channel|
     logger.info("  fetching #{channel.class.name}")
