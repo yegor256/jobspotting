@@ -40,13 +40,19 @@ get '/' do
 end
 
 post '/' do
-  @areas = Areas.new(Database.new.connect)
-  @areas.create(params[:name], '{}')
+  Areas.new(Database.new.connect).create(params[:name], '{}')
   redirect '/'
 end
 
 get '/area/:id' do |id|
-  @areas = Areas.new(Database.new.connect)
-  @area = @areas.get(id)
+  @area = Areas.new(Database.new.connect).get(id)
   erb :area
 end
+
+post '/area/:id' do |id|
+  areas = Areas.new(Database.new.connect)
+  area = areas.get(id)
+  areas.create(area.name, params[:sources])
+  redirect "/area/#{id}"
+end
+

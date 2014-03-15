@@ -9,6 +9,24 @@
     <h1>
       <xsl:value-of select="name"/>
     </h1>
+    <form action="" method="post">
+      <fieldset>
+        <div class="form-group">
+          <label for="sources" class="hidden-xs hidden-sm">
+            <xsl:text>Sources</xsl:text>
+          </label>
+          <textarea name="sources" id="sources" rows="8" class="form-control">
+            <xsl:value-of select="sources"/>
+          </textarea>
+        </div>
+        <div class="form-group">
+          <label><xsl:comment>for the submit button below</xsl:comment></label>
+          <button type="submit" class="btn btn-primary">
+            <xsl:text>Save</xsl:text>
+          </button>
+        </div>
+      </fieldset>
+    </form>
     <xsl:apply-templates select="offices/office" />
   </xsl:template>
   <xsl:template match="offices/office">
