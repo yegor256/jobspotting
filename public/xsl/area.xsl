@@ -33,7 +33,12 @@
     <p>
       <xsl:value-of select="name"/>
       <xsl:text>: </xsl:text>
-      <xsl:value-of select="jobs"/>
+      <a>
+        <xsl:attribute name="href">
+          <xsl:value-of select="link[@rel='see']/@href"/>
+        </xsl:attribute>
+        <xsl:value-of select="jobs"/>
+      </a>
     </p>
   </xsl:template>
 </xsl:stylesheet>

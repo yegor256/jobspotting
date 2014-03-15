@@ -8,6 +8,7 @@
       <office>
         <name><%= office[:name] %></name>
         <jobs><%= office[:jobs] %></jobs>
+        <link rel="see" href="/office/<%= office[:id] %>"/>
       </office>
     <% end %>
   </offices>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="/xsl/office.xsl" type="text/xsl"?>
+<page>
+  <name><%= @office.name %></name>
+  <jobs>
+    <% for job in @office.jobs %>
+        <job>
+          <title><%= job[:title] %></title>
+          <uri><%= job[:uri] %></uri>
+        </job>
+    <% end %>
+  </jobs>
+</page>

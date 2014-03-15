@@ -50,8 +50,13 @@ class WebTest < Test::Unit::TestCase
     assert_match(/<page>/, last_response.body)
   end
 
-  def test_with_params
+  def test_area
     get '/area/1'
+    assert_match(/<page>/, last_response.body)
+  end
+
+  def test_office
+    get '/office/1'
     assert_match(/<page>/, last_response.body)
   end
 

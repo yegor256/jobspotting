@@ -31,19 +31,20 @@
 # License:: Free to use and change if the author is mentioned
 
 require_relative '../../lib/areas'
-require_relative '../../lib/job'
-require_relative '../../lib/jobs'
 require_relative '../../lib/database'
+require_relative '../../lib/job'
+require_relative '../../lib/office'
 require 'test/unit'
 
-class AreaTest < Test::Unit::TestCase
+class OfficeTest < Test::Unit::TestCase
 
-  def test_create
+  def test_fetch
     db = Database.new.connect
-    json = '{"hey": 1}'
-    area = Areas.new(db).create('first', json)
-    assert_equal(area.name, 'first')
-    assert_equal(area.sources, json)
+    area = Areas.new(db).create('first', '{}')
+    area.jobs.push(Job.new('#uri', 'IBM', 'Ruby developer'))
+    office = Office.new(db, 1)
+    assert_not_nil(office.name)
+    assert_not_nil(office.jobs)
     db.disconnect
   end
 

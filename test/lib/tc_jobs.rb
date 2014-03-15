@@ -44,6 +44,7 @@ class JobsTest < Test::Unit::TestCase
     area = Areas.new(db).create('test', '{}')
     id = Jobs.new(db, area.id).push(job)
     assert_not_nil id
+    db.disconnect
   end
 
   def test_uniqueness
@@ -54,6 +55,7 @@ class JobsTest < Test::Unit::TestCase
     first = jobs.push(job)
     second = jobs.push(job)
     assert_equal(first, second)
+    db.disconnect
   end
 
 end

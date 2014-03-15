@@ -52,6 +52,7 @@ class AreasTest < Test::Unit::TestCase
     areas.all.each do |area|
       assert_instance_of(Area, area)
     end
+    db.disconnect
   end
 
 end

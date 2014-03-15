@@ -30,21 +30,23 @@
 # Copyright:: Copyright (c) 2009-2014, Curiost.com
 # License:: Free to use and change if the author is mentioned
 
-require_relative '../../lib/areas'
-require_relative '../../lib/job'
-require_relative '../../lib/jobs'
-require_relative '../../lib/database'
-require 'test/unit'
+class Office
 
-class AreaTest < Test::Unit::TestCase
+  def initialize(db, id)
+    @db = db
+    @id = id
+  end
 
-  def test_create
-    db = Database.new.connect
-    json = '{"hey": 1}'
-    area = Areas.new(db).create('first', json)
-    assert_equal(area.name, 'first')
-    assert_equal(area.sources, json)
-    db.disconnect
+  def id
+    @id
+  end
+
+  def name
+    @db[:office].where(:id => @id).first[:name]
+  end
+
+  def jobs
+    @db[:job].where(:office => @id)
   end
 
 end

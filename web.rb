@@ -69,4 +69,9 @@ post '/area/:id' do |id|
   redirect "/area/#{id}"
 end
 
+get '/office/:id' do |id|
+  @area = Areas.new(db).get(id)
+  erb :area
+end
+
 db.disconnect
