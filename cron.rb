@@ -48,10 +48,12 @@ Areas.new(db).all.each do |area|
   logger.info("area #{area.name}")
   jobs = area.jobs
   Factory.new.make(area.sources).each do |channel|
-    logger.info("  fetching #{channel.class.name}")
+    total = 0
     channel.fetch.each do |job|
       jobs.push(job)
+      ++total
     end
+    logger.info("  fetched #{channel.class.name}: #{total} jobs")
   end
 end
 

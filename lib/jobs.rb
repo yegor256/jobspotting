@@ -34,10 +34,14 @@ require 'sequel'
 
 # Collection of jobs
 class Jobs
+
+  # Ctor.
   def initialize(db, id)
     @db = db
     @id = id
   end
+
+  # Add new job to the collection (returns its ID).
   def push(job)
     row = @db[:job].where(:uri => job.uri)
     office = office(job.office)
@@ -59,7 +63,9 @@ class Jobs
     end
     id
   end
+
   private
+
   def office(name)
     row = @db[:office].where(:name => name)
     if row.empty?
@@ -69,4 +75,5 @@ class Jobs
     end
     id
   end
+
 end
