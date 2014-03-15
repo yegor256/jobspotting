@@ -35,15 +35,15 @@ StandaloneMigrations::Tasks.load_tasks
 # heroku and configure DB data for migration
 StandaloneMigrations::Configurator.environments_config do |env|
   env.on 'production' do
-    if (ENV['DATABASE_URL'])
+    if ENV['DATABASE_URL']
       db = URI.parse(ENV['DATABASE_URL'])
       return {
-        :adapter => 'postgresql',
-        :host => db.host,
-        :username => db.user,
-        :password => db.password,
-        :database => db.path[1..-1],
-        :encoding => 'utf8'
+        adapter: 'postgresql',
+        host: db.host,
+        username: db.user,
+        password: db.password,
+        database: db.path[1..-1],
+        encoding: 'utf8'
       }
     end
     nil

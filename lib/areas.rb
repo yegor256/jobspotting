@@ -47,7 +47,7 @@ class Areas
       id = row.first[:id]
     else
       id = @db[:area].insert(
-          :name => name, :sources => sources
+        :name => name, :sources => sources
       )
     end
     Area.new(@db, id)
