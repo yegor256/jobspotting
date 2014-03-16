@@ -58,7 +58,7 @@ class ChCareerBuilder
     end
     criteria.search.map { |entry|
       Job.new(
-        entry.details_url,
+        "http://www.careerbuilder.com/JobSeeker/Jobs/JobDetails.aspx?Job_DID=#{entry.did}",
         entry.company_name, entry.title
       )
     }
