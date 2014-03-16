@@ -30,6 +30,7 @@
 # Copyright:: Copyright (c) 2009-2014, Curiost.com
 # License:: Free to use and change if the author is mentioned
 
+require_relative 'ch_careerbuilder'
 require_relative 'ch_careers'
 require_relative 'ch_dice'
 require_relative 'ch_github'
