@@ -38,15 +38,17 @@ class ChSimplyHired
   def initialize(args)
     @feed = args['feed']
     raise 'feed is empty' if @feed.empty?
+    @separator = args['separator']
+    raise 'separator is empty' if @separator.empty?
   end
 
   def fetch
     Feedzirra::Feed.fetch_and_parse(@feed).entries.map { |entry|
       entry.sanitize!
       title = entry.title
-      pos = title.rindex(' at ')
+      pos = title.rindex(@separator)
       if pos
-        office = title[pos + 4, title.length]
+        office = title[pos + @separator.length, title.length]
       else
         office = 'unknown'
       end

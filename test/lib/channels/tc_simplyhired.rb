@@ -37,7 +37,8 @@ class ChSimplyHiredTest < Test::Unit::TestCase
 
   def test_fetch
     args = {
-        'feed' => 'http://www.simplyhired.com/a/job-feed/rss/q-java/l-Mountain+View%2C+CA'
+        'feed' => 'http://www.simplyhired.com/a/job-feed/rss/q-java/l-Mountain+View%2C+CA',
+        'separator' => ' at '
     }
     ChSimplyHired.new(args).fetch.each do |job|
       assert_not_nil job.uri
