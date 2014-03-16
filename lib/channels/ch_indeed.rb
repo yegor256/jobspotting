@@ -42,7 +42,7 @@ class ChIndeed
   def fetch
     Indeed.new.search(@args).map { |entry|
       Job.new(
-        "http://http://www.indeed.com/viewjob?jk=#{entry['jobkey']}",
+        "http://www.indeed.com/viewjob?jk=#{entry['jobkey']}",
         entry['company'], entry['jobtitle']
       )
     }
