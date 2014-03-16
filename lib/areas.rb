@@ -42,7 +42,7 @@ class Areas
   end
 
   def all
-    @db[:area].map { |row|
+    @db[:area].order(:name).map { |row|
       Area.new(@db, row[:id])
     }
   end
