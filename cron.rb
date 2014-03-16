@@ -44,6 +44,8 @@ logger.info('Ready to go...')
 
 db = Database.new.connect
 
+db[:job].where{date < Date.today - 10}.delete
+
 Areas.new(db).all.each do |area|
   logger.info("area #{area.name}")
   jobs = area.jobs
