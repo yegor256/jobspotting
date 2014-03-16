@@ -30,21 +30,28 @@
 # Copyright:: Copyright (c) 2009-2014, Curiost.com
 # License:: Free to use and change if the author is mentioned
 
-require_relative 'ch_careerbuilder'
-require_relative 'ch_careers'
-require_relative 'ch_dice'
-require_relative 'ch_github'
-require_relative 'ch_indeed'
-require_relative 'ch_linkedin'
-require_relative 'ch_simplyhired'
-require 'json'
+require_relative '../job'
+require 'feedzirra'
 
-class Factory
+class ChSimplyHired
 
-  def make(json)
-    JSON.parse(json).map do |key, value|
-      Kernel.const_get(key).new(value)
-    end
+  def initialize(args)
+    @feed = args['feed']
+    raise 'feed is empty' if @feed.empty?
+  end
+
+  def fetch
+    Feedzirra::Feed.fetch_and_parse(@feed).entries.map { |entry|
+      entry.sanitize!
+      title = entry.title
+      pos = title.rindex(' at ')
+      if pos
+        office = title[pos + 4, title.length]
+      else
+        office = 'unknown'
+      end
+      Job.new(entry.url, office, title)
+    }
   end
 
 end

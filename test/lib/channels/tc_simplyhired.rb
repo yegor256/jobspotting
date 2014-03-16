@@ -30,20 +30,19 @@
 # Copyright:: Copyright (c) 2009-2014, Curiost.com
 # License:: Free to use and change if the author is mentioned
 
-require_relative 'ch_careerbuilder'
-require_relative 'ch_careers'
-require_relative 'ch_dice'
-require_relative 'ch_github'
-require_relative 'ch_indeed'
-require_relative 'ch_linkedin'
-require_relative 'ch_simplyhired'
-require 'json'
+require_relative '../../../lib/channels/ch_simplyhired'
+require 'test/unit'
 
-class Factory
+class ChSimplyHiredTest < Test::Unit::TestCase
 
-  def make(json)
-    JSON.parse(json).map do |key, value|
-      Kernel.const_get(key).new(value)
+  def test_fetch
+    args = {
+        'feed' => 'http://www.simplyhired.com/a/job-feed/rss/q-java/l-Mountain+View%2C+CA'
+    }
+    ChSimplyHired.new(args).fetch.each do |job|
+      assert_not_nil job.uri
+      assert_not_nil job.title
+      assert_not_nil job.office
     end
   end
 
