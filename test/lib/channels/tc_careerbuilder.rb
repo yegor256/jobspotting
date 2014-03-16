@@ -30,20 +30,25 @@
 # Copyright:: Copyright (c) 2009-2014, Curiost.com
 # License:: Free to use and change if the author is mentioned
 
-source 'https://rubygems.org'
-ruby '2.1.0'
+require_relative '../../../lib/channels/ch_careerbuilder'
+require 'test/unit'
 
-gem 'rails'
-gem 'rake'
-gem 'sinatra', '1.1.0'
-gem 'pg'
-gem 'feedzirra'
-gem 'sequel'
-gem 'psych'
-gem 'ramcrest'
-gem 'logger'
-gem 'linkedin'
-gem 'indeed'
-gem 'test-unit'
-gem 'iconv'
-gem 'cb-api', '0.1.2'
+class ChCareerBuilderTest < Test::Unit::TestCase
+
+  def test_fetch
+    args = {
+        'devkey' => 'WDHL0SN72S461075PR0G',
+        'keywords' => 'java',
+        'location' => 'San Francisco, CA',
+        'country' => 'US'
+    }
+    jobs = ChCareerBuilder.new(args).fetch
+    assert_not_equal(jobs.size, 0)
+    jobs.each do |job|
+      assert_not_nil job.uri
+      assert_not_nil job.title
+      assert_not_nil job.office
+    end
+  end
+
+end

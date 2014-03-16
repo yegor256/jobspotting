@@ -30,20 +30,38 @@
 # Copyright:: Copyright (c) 2009-2014, Curiost.com
 # License:: Free to use and change if the author is mentioned
 
-source 'https://rubygems.org'
-ruby '2.1.0'
+require_relative '../job'
+require 'cb'
 
-gem 'rails'
-gem 'rake'
-gem 'sinatra', '1.1.0'
-gem 'pg'
-gem 'feedzirra'
-gem 'sequel'
-gem 'psych'
-gem 'ramcrest'
-gem 'logger'
-gem 'linkedin'
-gem 'indeed'
-gem 'test-unit'
-gem 'iconv'
-gem 'cb-api', '0.1.2'
+class ChCareerBuilder
+
+  def initialize(args)
+    @key = args['devkey']
+    raise 'empty devkey' if @key.empty?
+    @args = args
+  end
+
+  def fetch
+    Cb.configure do |config|
+      config.dev_key = @key
+      config.time_out = 5
+    end
+    criteria = Cb.job_search_criteria
+    if @args.has_key?('location')
+      criteria.location = @args['location']
+    end
+    if @args.has_key?('country')
+      criteria.country_code = @args['country']
+    end
+    if @args.has_key?('keywords')
+      criteria.keywords = @args['keywords']
+    end
+    criteria.search.map { |entry|
+      Job.new(
+        entry.details_url,
+        entry.company_name, entry.title
+      )
+    }
+  end
+
+end
