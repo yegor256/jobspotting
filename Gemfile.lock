@@ -121,6 +121,7 @@ DEPENDENCIES
   feedzirra
   iconv
   indeed
+  json
   linkedin
   logger
   pg

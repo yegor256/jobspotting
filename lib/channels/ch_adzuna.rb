@@ -30,22 +30,25 @@
 # Copyright:: Copyright (c) 2009-2014, Curiost.com
 # License:: Free to use and change if the author is mentioned
 
-require_relative 'ch_adzuna'
-require_relative 'ch_careerbuilder'
-require_relative 'ch_careers'
-require_relative 'ch_dice'
-require_relative 'ch_github'
-require_relative 'ch_indeed'
-require_relative 'ch_linkedin'
-require_relative 'ch_simplyhired'
+require_relative '../job'
+require 'net/http'
 require 'json'
 
-class Factory
+class ChAdzuna
 
-  def make(json)
-    JSON.parse(json).map do |key, value|
-      Kernel.const_get(key).new(value)
-    end
+  def initialize(args)
+    @endpoint = args['endpoint']
+    raise 'endpoint is empty' if @endpoint.empty?
+  end
+
+  def fetch
+    JSON.parse(Net::HTTP.get(URI(@endpoint)))['results'].map { |entry|
+      Job.new(
+        entry['redirect_url'],
+        entry['company']['display_name'],
+        entry['title']
+      )
+    }
   end
 
 end

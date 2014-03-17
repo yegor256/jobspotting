@@ -9,7 +9,8 @@ We're spotting these sites (through their APIs):
  * [craigslist.com](http://www.craigslist.com): [RSS](http://sfbay.craigslist.org/sof/index.rss)
  * [linkedin.com](http://www.linkedin.com): [API](https://developer.linkedin.com/apis#jobs)
  * [indeed.com](http://www.indeed.com): [API](https://ads.indeed.com/jobroll/xmlfeed)
- * [careerbuilder.com](http://careerbuilder.com): [API](http://developer.careerbuilder.com/)
+ * [careerbuilder.com](http://www.careerbuilder.com): [API](http://developer.careerbuilder.com/)
+ * [simplyhired.com](http://www.simplyhired.com): [API](https://developer.adzuna.com/)
 
 Every few minutes we check what's new and store every new job in PostgreSQL tables:
 
